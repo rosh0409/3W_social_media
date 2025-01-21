@@ -4,11 +4,10 @@ import { connect } from "./db/connection.js";
 import { userRoute } from "./routes/userRoutes.js";
 import { adminRoute } from "./routes/adminRoutes.js";
 import dotenv from "dotenv";
-
-const app = express();
 dotenv.config();
 
-app.use("/static", express.static("./uploads"));
+const app = express();
+
 app.use(cors());
 app.use(express.json());
 

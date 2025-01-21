@@ -1,24 +1,23 @@
 import express from "express";
 import User from "../model/User.js";
-import { upload } from "../utils/multer.js";
+import { upload } from "../utils/upload.js";
+import { multerUpload } from "../utils/multer.js";
 
 export const userRoute = express.Router();
-
-userRoute.post("/submit", upload.array("images"), async (req, res) => {
+userRoute.post("/submit", multerUpload.array("images"), async (req, res) => {
   const { name, socialMedia } = req.body;
-
-  if (!name || !socialMedia || !req.files) {
+  const filepaths = req.files.map((file) => {
+    return file.path;
+  });
+  if (!name || !socialMedia || !req.files || !filepaths) {
     return res.status(400).send({ message: "All fields are required." });
   }
-
-  // Save the submission to the database
+  const images = await upload(filepaths);
   const user = new User({
     name,
     socialMedia,
-    images: req.files.map((file) => file.filename),
+    images,
   });
-  req.files.map((file) => console.log(file));
-
   try {
     await user.save();
     res.send({
@@ -26,7 +25,7 @@ userRoute.post("/submit", upload.array("images"), async (req, res) => {
       data: user,
     });
   } catch (err) {
-    console.error(err);
+    console.error(err.message);
     res.status(500).send({ message: "Failed to save to database." });
   }
 });

@@ -7,8 +7,8 @@ adminRoute.get("/dash", async (req, res) => {
   try {
     const data = await User.find();
     res.json({ message: "Data fetched", data });
-  } catch (error) {
-    console.error(error);
+  } catch (err) {
+    console.error(err);
     res.status(500).send({ message: "Failed to fetch submissions." });
   }
 });

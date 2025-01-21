@@ -40,7 +40,7 @@ const AdminDashboard = () => {
               {user?.images?.map((image, index) => (
                 <div key={index} className="stackedImage">
                   <img
-                    src={`http://localhost:8000/static/${image}`}
+                    src={`${image}`}
                     alt={user.name}
                     className="thumbnail"
                   />
@@ -64,11 +64,11 @@ const AdminDashboard = () => {
             <div className="imageGallery">
               {selectedUser?.images?.map((image, index) => (
                 <a
-                  href={`http://localhost:8000/static/${image}`}
+                  href={`${image}`}
                   target="_blank"
                   rel="noopener noreferrer">
                   <img
-                    src={`http://localhost:8000/static/${image}`}
+                    src={`${image}`}
                     alt={selectedUser.name}
                     className="fullImage"
                   />
