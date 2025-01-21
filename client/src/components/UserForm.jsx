@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import toast from "react-hot-toast";
 
 const UserForm = () => {
   const [formData, setFormData] = useState({
@@ -19,7 +20,7 @@ const UserForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    const toastId = toast.loading("Loading...");
     const data = new FormData();
     data.append("name", formData.name);
     data.append("socialMedia", formData.socialMedia);
@@ -32,10 +33,20 @@ const UserForm = () => {
         "https://threew-social-media-xsjd.onrender.com/user/submit",
         data
       );
-      alert(response.data.message);
-      window.location.reload();
+      toast.dismiss(toastId);
+      if(response.status===200){
+        toast.success(response.data.message, {
+          duration: 4000,
+          position: "top-center",
+        });
+        window.location.reload();
+      }
     } catch (error) {
       console.error(error);
+      toast.error("Failed to submit the form.", {
+        duration: 4000,
+        position: "top-center",
+      });
       alert("Failed to submit the form.");
     }
   };
