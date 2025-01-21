@@ -8,8 +8,6 @@ import dotenv from "dotenv";
 const app = express();
 dotenv.config();
 
-console.log(process.env.MONGODB_URI);
-
 app.use("/static", express.static("./uploads"));
 app.use(cors());
 app.use(express.json());
