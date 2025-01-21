@@ -1,6 +1,5 @@
 import "./App.css";
 import AdminDashboard from "./components/AdminDashboard";
-// import AdminDashboard from "./components/AdminDashboard";
 
 import { Navbar } from "./components/Navbar";
 import UserForm from "./components/UserForm";

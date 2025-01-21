@@ -9,7 +9,9 @@ const AdminDashboard = () => {
   useEffect(() => {
     const fetchSubmissions = async () => {
       try {
-        const response = await axios.get("http://localhost:8000/admin/dash");
+        const response = await axios.get(
+          "https://threew-social-media-xsjd.onrender.com/admin/dash"
+        );
         console.log(response.data.data);
         setUsers(response.data?.data);
       } catch (error) {

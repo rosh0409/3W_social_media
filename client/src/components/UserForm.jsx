@@ -29,11 +29,10 @@ const UserForm = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:8000/user/submit",
+        "https://threew-social-media-xsjd.onrender.com/user/submit",
         data
       );
       alert(response.data.message);
-      //   navigate("/");
       window.location.reload();
     } catch (error) {
       console.error(error);
